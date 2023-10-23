@@ -15,12 +15,12 @@ $enabledZones = $person->getEnabledZones();
 
 foreach($enabledZones as $zone){
     echo "Purging {$zone->getName()} for {$purgeTime} seconds" . PHP_EOL;    
-    // $rachioClient->startZone($zone->getID(), $purgeTime);
+    $rachioClient->startZone($zone->getID(), $purgeTime);
 
     // wait for zone to finish
     sleep($purgeTime);
 
     // wait for compressor to recharge
-    echo "Waiting for compressor to recharge for {$rechargeTime} seconds\n";
+    echo "Waiting for compressor to recharge for {$rechargeTime} seconds" . PHP_EOL;
     sleep($rechargeTime);
 }
