@@ -52,4 +52,21 @@ class RachioClient
         $response = $this->client->get("device/$deviceId");
         return new Device(json_decode($response->getBody(), true));
     }
+
+    public function startZone(string $zoneId, int $duration)
+    {
+        try {
+            $data = [
+                'json' => [
+                    'id' => $zoneId,
+                    'duration' => $duration,
+                ],
+            ];
+
+            $response = $this->client->put('zone/start', $data);
+            return json_decode($response->getBody(), true);
+        } catch (RequestException $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+    }
 }
