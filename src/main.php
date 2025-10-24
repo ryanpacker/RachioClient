@@ -14,13 +14,13 @@ $person = $rachioClient->getPerson($personId);
 $enabledZones = $person->getEnabledZones();
 
 foreach($enabledZones as $zone){
-    echo "Purging {$zone->getName()} for {$purgeTime} seconds" . PHP_EOL;    
+    echo "[" . date('Y-m-d H:i:s') . "] Purging {$zone->getName()} for {$purgeTime} seconds" . PHP_EOL;    
     $rachioClient->startZone($zone->getID(), $purgeTime);
 
     // wait for zone to finish
     sleep($purgeTime);
 
     // wait for compressor to recharge
-    echo "Waiting for compressor to recharge for {$rechargeTime} seconds" . PHP_EOL;
+    echo "[" . date('Y-m-d H:i:s') . "] Waiting for compressor to recharge for {$rechargeTime} seconds" . PHP_EOL;
     sleep($rechargeTime);
 }
